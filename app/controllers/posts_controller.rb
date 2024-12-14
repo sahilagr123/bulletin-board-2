@@ -24,7 +24,10 @@ class PostsController < ApplicationController
     the_post.expires_on = params.fetch("query_expires_on")
     the_post.board_id = params.fetch("query_board_id")
 
+    
+
     if the_post.valid?
+      the_post.user_id = current_user.id
       the_post.save
       redirect_to("/boards/#{the_post.board_id}", { :notice => "Post created successfully." })
     else
